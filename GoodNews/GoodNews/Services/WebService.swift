@@ -16,12 +16,13 @@ class Webservice {
         
         //URLに基づいてデータタスクを作成し、非同期でデータを取得
         URLSession.shared.dataTask(with: url) { data, response, error in
-            
             //エラーがあればエラー内容を出力し、nilをコールバック
             if let error = error {
                 print(error.localizedDescription)
                 completion(nil)
             }
+
+            
             //データがあればデータを出力
             else if let data = data {
                 

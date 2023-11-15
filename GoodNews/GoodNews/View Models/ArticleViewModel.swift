@@ -3,8 +3,8 @@
 import Foundation
 
 
-///特定の1つのニュース記事を表示する親ビューモデル
-//記事のリストを管理するViewModel
+
+///記事のリストを管理するViewModel
 struct ArticleListViewModel {
     let articles: [Article]
 }
@@ -27,13 +27,18 @@ extension ArticleListViewModel {
         return self.articles.count
     }
     
-    //指定されたインデックスの記事を返す
+    //指定されたインデックスの記事ビューモデルを返す
     func articleAtIndex(_ index: Int) -> ArticleViewModel {
         let article = self.articles[index]
         return ArticleViewModel(article)
     }
 }
 
+
+
+
+
+///特定の1つのニュース記事を表示する親ビューモデル
 //単一の記事を表すViewModel
 struct ArticleViewModel {
     private let article: Article
