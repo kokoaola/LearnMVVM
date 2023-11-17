@@ -28,7 +28,7 @@ extension OrderListViewModel {
 
 
 
-///
+///各オーダーに関するモデル
 struct OrderViewModel {
     let order: Order
 }

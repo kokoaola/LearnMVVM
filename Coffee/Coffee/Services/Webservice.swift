@@ -7,7 +7,7 @@
 
 import Foundation
 
-import Foundation
+
 
 ///ネットワーク関連のエラーを定義する列挙型
 enum NetworkError: Error {
@@ -20,9 +20,25 @@ enum NetworkError: Error {
 }
 
 
+///どのHTTPメソッドを使用するかを指定するための列挙型
+enum HttpMethod: String {
+    case get = "GET"
+    case post = "POST"
+}
+
+
 ///取得するリソースを表すジェネリック構造体、Codableに準拠する任意の型Tで使用可能
 struct Resource<T: Codable> {
     let url: URL
+    var httpMethod: HttpMethod = .get
+    var body: Data? = nil 
+}
+
+///リソースを拡張して、URLの初期値が入力できるようにする
+extension Resource {
+    init(url: URL) {
+        self.url = url
+    }
 }
 
 
@@ -32,8 +48,15 @@ class Webservice {
     ///ジェネリック型のリソースをロードし、結果のResult型を非同期で返す関数
     func load<T>(resource: Resource<T>, completion: @escaping (Result<T, NetworkError>) -> Void) {
         
+        //resourceをもとにリクエストを作成
+        var request = URLRequest(url: resource.url)
+        request.httpMethod = resource.httpMethod.rawValue
+        request.httpBody = resource.body
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
         //URLSessionを使用して、リソースのURLからデータを非同期に取得
-        URLSession.shared.dataTask(with: resource.url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             
             //データがnilでなく、エラーもないことを確認、そうでなければエラーを返す
             guard let data = data, error == nil else {
