@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class OrdersTableViewController: UITableViewController{
+class OrdersTableViewController: UITableViewController, AddCoffeeOrderDelegate{
         
     //注文リストのViewModel（ビューに必要なデータ全体）を保持する変数
     var orderListViewModel = OrderListViewModel()
@@ -23,7 +23,7 @@ class OrdersTableViewController: UITableViewController{
     }
     
     
-    //注文データを取得し、テーブルビューを更新する関数
+    ///注文データを取得し、テーブルビューを更新する関数
     private func populateOrders() {
         
         //注文データのリソースを作成
@@ -44,23 +44,63 @@ class OrdersTableViewController: UITableViewController{
                 //エラーがあればコンソールに出力
                 print(error)
             }
-
         }
+    }
+    
+    
+    ///セグエを使って新しいビューコントローラへ遷移する前の準備を行うメソッド
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //セグエの宛先がUINavigationControllerであることを確認し、
+        //その最初のビューコントローラがAddOrderViewControllerであることを確認
+        guard let navC = segue.destination as? UINavigationController,
+              let addCoffeeOrderVC = navC.viewControllers.first as? AddOrderViewController else {
+            //これらの条件に合わない場合はクラッシュさせる
+            fatalError("Error performing segue!")
+        }
+        
+        //AddOrderViewControllerのデリゲートを現在のビューコントローラに設定
+        addCoffeeOrderVC.delegate = self
+    }
+    
+
+
+    ///Saveボタンのタップ時に呼ばれるAddCoffeeOrderDelegateプロトコルのdelegate関数
+    func addCoffeeOrderViewControllerDidSave(order: Order, controller: UIViewController) {
+        //注文画面を閉じる
+        controller.dismiss(animated: true, completion: nil)
+        
+        //注文オブジェクトからビューモデルを作成
+        let orderVM = OrderViewModel(order: order)
+        //注文リストに新しい注文を追加
+        self.orderListViewModel.ordersViewModel.append(orderVM)
+        //テーブルビューに新しい行を追加
+        self.tableView.insertRows(at: [IndexPath.init(row: self.orderListViewModel.ordersViewModel.count - 1, section: 0)], with: .automatic)
         
     }
     
-    //テーブルビューのセクション数を設定
+    ///closeボタンのタップ時に呼ばれるAddCoffeeOrderDelegateプロトコルのdelegate関数
+    func addCoffeeOrderViewControllerDidClose(controller: UIViewController) {
+        //注文画面を閉じる
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    ///テーブルビューのセクション数を設定
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    //テーブルビューの各セクションの行数を設定
+    
+    ///テーブルビューの各セクションの行数を設定
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //注文リストのViewModel配列内の注文数を返す
         return self.orderListViewModel.ordersViewModel.count
     }
 
-    //テーブルビューのセルを設定
+    
+    ///テーブルビューのセルを設定
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         //指定されたインデックスの注文ViewModelを取得
@@ -76,5 +116,4 @@ class OrdersTableViewController: UITableViewController{
         return cell
 
     }
-    
 }

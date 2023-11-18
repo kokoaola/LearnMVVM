@@ -8,9 +8,20 @@
 import Foundation
 import UIKit
 
+
+protocol AddCoffeeOrderDelegate {
+    //Saveボタンを押したときに起動
+    func addCoffeeOrderViewControllerDidSave(order: Order, controller: UIViewController)
+    //閉じるボタンを押したときに起動
+    func addCoffeeOrderViewControllerDidClose(controller: UIViewController)
+}
+
 ///プラスを押した時に出現するビューのコントローラー
 class AddOrderViewController: UIViewController, UITableViewDelegate,
                               UITableViewDataSource{
+    
+    //ナビゲーションバーのボタンのためのデリゲート
+    var delegate: AddCoffeeOrderDelegate?
 
     //Addorderビューコントローラービューに表示されるすべてのオーダーを制御
     private var vm = AddCoffeeOrderViewModel()
@@ -81,12 +92,14 @@ class AddOrderViewController: UIViewController, UITableViewDelegate,
     }
     
     
-    //閉じるボタンのアクション、デリゲートを通じて閉じる処理を伝える
-//    @IBAction func close() {
-//        if let delegate = delegate {
-//            delegate.addCoffeeOrderViewControllerDidClose(controller: self)
-//        }
-//    }
+    ///閉じるボタンのアクション、デリゲートを通じて閉じる処理を伝える
+    @IBAction func close() {
+        if let delegate = delegate {
+            //OrdersTableViewControllerのaddCoffeeOrderViewControllerDidClose関数をトリガー
+            //このコントローラーを使用して直接ページを閉じることもできるが、それぞれのコントローラーの役割を明確にするためや、他の処理を追加したいときのためにデリゲートを使用して親に委託する
+            delegate.addCoffeeOrderViewControllerDidClose(controller: self)
+        }
+    }
     
     //保存ボタンのアクション
     @IBAction func save() {
@@ -110,12 +123,12 @@ class AddOrderViewController: UIViewController, UITableViewDelegate,
             switch result {
                 //成功
             case .success(let order):
-                print(order)
-//                if let order = order, let delegate = self.delegate {
-//                    DispatchQueue.main.async {
-//                        delegate.addCoffeeOrderViewControllerDidSave(order: order, controller: self)
-//                    }
-//                }
+                if let order = order, let delegate = self.delegate {
+                    DispatchQueue.main.async {
+                        //OrdersTableViewControllerのaddCoffeeOrderViewControllerDidSave関数をトリガー
+                        delegate.addCoffeeOrderViewControllerDidSave(order: order, controller: self)
+                    }
+                }
                 //失敗
             case .failure(let error):
                 print(error)
