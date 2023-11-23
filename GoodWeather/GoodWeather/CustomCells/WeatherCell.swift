@@ -16,4 +16,9 @@ class WeatherCell: UITableViewCell {
     //温度ラベル
     @IBOutlet weak var temperatureLabel: UILabel!
     
+    
+    func configure(_ vm: WeatherViewModel) {
+        self.cityNameLabel.text = vm.city
+        self.temperatureLabel.text = "\(vm.temperature.formatAsDegree())"
+    }
 }
