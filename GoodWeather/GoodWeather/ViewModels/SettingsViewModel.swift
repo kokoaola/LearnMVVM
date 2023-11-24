@@ -18,7 +18,8 @@ enum Unit: String, CaseIterable {
     case fahrenheit = "imperial"
 }
 
-/// Unit enumの拡張。表示用の名前を提供する。
+/// Unit enumの拡張。表示用の名前を提供する
+///AppDelegate内にデフォルト設定をセットアップするプライベートメソッドsetupDefaultSettings()があり、初回起動時に実行される
 extension Unit {
     
     //単位に対応する表示名を返すcomputed property
@@ -38,7 +39,7 @@ extension Unit {
 
 
 
-/// 設定に関連するデータを扱うビューモデル。
+/// 設定に関連するデータを扱うビューモデル
 class SettingsViewModel {
     
     //利用可能な全単位を返す

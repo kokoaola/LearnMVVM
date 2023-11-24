@@ -14,10 +14,10 @@ struct Constants {
         static func urlForWeatherByCity(city: String) -> URL {
             
             // get the default settings for temperature
-            // let userDefaults = UserDefaults.standard
-            // let unit = (userDefaults.value(forKey: "unit") as? String) ?? "imperial"
+             let userDefaults = UserDefaults.standard
+             let unit = (userDefaults.value(forKey: "unit") as? String) ?? "imperial"
             
-            return URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city.escaped())&appid=b39d32abf80c2b7cefb59f0510125b12&units=imperial")!
+            return URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city.escaped())&appid=b39d32abf80c2b7cefb59f0510125b12&units=\(unit)")!
         }
         
     }

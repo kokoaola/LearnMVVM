@@ -14,13 +14,21 @@ import UIKit
 class WeatherListTableViewController: UITableViewController,AddWeatherDelegate {
     private var weatherListViewModel = WeatherListViewModel()
     
+    //最後に選択された単位を格納
+    private var lastUnitSelection: Unit!
     
     //ビューがロードされたときに呼ばれる
     override func viewDidLoad() {
         super.viewDidLoad()
         //ナビゲーションバーのタイトルを大きく表示する設定
         self.navigationController?.navigationBar.prefersLargeTitles = true
-    
+        
+        //ユーザーデフォルトから値を取得
+        let userDefaults = UserDefaults.standard
+        if let value = userDefaults.value(forKey: "unit") as? String {
+            self.lastUnitSelection = Unit(rawValue: value)!
+        }
+        
         /*
         //Web サービスとコードが機能するかどうかを確認
         //リソースを作成（クロージャはまだ実行されない）
@@ -74,6 +82,8 @@ class WeatherListTableViewController: UITableViewController,AddWeatherDelegate {
         //segueの識別子がストーリーボードで設定した識別子と一致している場合、prepareSegueForAddWeatherCityViewControllerを実行
         if segue.identifier == "AddWeatherCityViewController" {
             prepareSegueForAddWeatherCityViewController(segue: segue)
+        }else if segue.identifier == "SettingsTableViewController"{
+            prepareSegueForSettingsTableViewController(segue: segue)
         }
     }
     
@@ -92,9 +102,24 @@ class WeatherListTableViewController: UITableViewController,AddWeatherDelegate {
             fatalError("AddWeatherCityController not found")
         }
         
-        //AddWeatherCityViewControllerのdelegateプロパティに自身を設定
+        //delegateプロパティに自身を設定
         addWeatherCityVC.delegate = self
     }
+    
+    private func prepareSegueForSettingsTableViewController(segue: UIStoryboardSegue) {
+        
+        guard let nav = segue.destination as? UINavigationController else {
+            fatalError("NavigationController not found")
+        }
+        
+        guard let settingsTVC = nav.viewControllers.first as? SettingsTableViewController else {
+            fatalError("SettingsTableViewController not found")
+        }
+        
+        settingsTVC.delegate = self
+        
+    }
+    
     
     
     //デリゲートメソッド
@@ -104,4 +129,23 @@ class WeatherListTableViewController: UITableViewController,AddWeatherDelegate {
         self.tableView.reloadData()
     }
 
+}
+
+
+
+//WeatherListTableViewControllerにSettingsDelegateプロトコル
+extension WeatherListTableViewController: SettingsDelegate {
+    
+    //設定が完了したときに呼ばれるメソッド
+    func settingsDone(vm: SettingsViewModel) {
+        //選択された単位が前回と異なる場合、更新処理を実行
+        if lastUnitSelection.rawValue != vm.selectedUnit.rawValue {
+//            //天気リストの単位を更新
+            weatherListViewModel.updateUnit(to: vm.selectedUnit)
+//            //テーブルビューを再読み込み
+            tableView.reloadData()
+//            //最後の単位選択を更新
+            lastUnitSelection = Unit(rawValue: vm.selectedUnit.rawValue)!
+        }
+    }
 }

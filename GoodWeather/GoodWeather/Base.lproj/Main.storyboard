@@ -58,7 +58,7 @@
                     <navigationItem key="navigationItem" title="GoodWeather" id="X7b-oD-Ddo">
                         <barButtonItem key="leftBarButtonItem" title="Settings" style="plain" id="S9t-eP-7At">
                             <connections>
-                                <segue destination="QJU-oR-GYM" kind="presentation" id="kBa-Zx-bc8"/>
+                                <segue destination="QJU-oR-GYM" kind="presentation" identifier="SettingsTableViewController" id="kBa-Zx-bc8"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="lMt-6b-3IA">
@@ -96,7 +96,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Setting" id="gnu-wi-7AJ">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="v0U-Br-PhP"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="v0U-Br-PhP">
+                            <connections>
+                                <action selector="done" destination="o3Z-la-K5F" id="ixS-f2-6Eh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufn-aN-k22" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

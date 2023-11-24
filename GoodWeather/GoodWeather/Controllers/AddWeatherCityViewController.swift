@@ -16,7 +16,6 @@ protocol AddWeatherDelegate {
 
 class AddWeatherCityViewController: UIViewController {
     
-    
     private var addWeatherVM = AddWeatherViewModel()
     var delegate: AddWeatherDelegate?
     

@@ -80,3 +80,11 @@ Tests
     - TableViewControllerのinspectorパネルのCustomClassから最初に作ったxxxxTableViewControllerを選択する
     - TableViewControllerのTitleを変更する
 - xxxxTableViewController.swiftにコード書く
+
+
+## Bindingとは
+- ViewからViewModelのパターン
+    - Viewのテキストフィールドに入力されるとViewModelのプロパティが自動で更新される
+- ViewModeからViewlのパターン
+    - ViewModeのプロパティが変更されるたびにViewのテキストフィールドのテキストが自動で更新される
+

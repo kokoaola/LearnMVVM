@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     
+        setupDefaultSettings()
         
         return true
     }
@@ -46,6 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    ///デフォルト設定をセットアップするプライベートメソッド
+    private func setupDefaultSettings() {
+        
+        //UserDefaultsのインスタンスを取得
+        let userDefaults = UserDefaults.standard
+        //もし"unit"キーに値が設定されていなければ、デフォルト値をセット
+        if userDefaults.value(forKey: "unit") == nil {
+            //デフォルトとして華氏をセット
+            userDefaults.set(Unit.fahrenheit.rawValue, forKey: "unit")
+        }
+        
+    }
 }
 
