@@ -9,25 +9,25 @@
 /* Begin PBXBuildFile section */
 		3BDAABCB2B1063FF0013DB89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAABCA2B1063FF0013DB89 /* AppDelegate.swift */; };
 		3BDAABCD2B1063FF0013DB89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAABCC2B1063FF0013DB89 /* SceneDelegate.swift */; };
-		3BDAABCF2B1063FF0013DB89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAABCE2B1063FF0013DB89 /* ViewController.swift */; };
 		3BDAABD22B1063FF0013DB89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAABD02B1063FF0013DB89 /* Main.storyboard */; };
 		3BDAABD42B1064000013DB89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAABD32B1064000013DB89 /* Assets.xcassets */; };
 		3BDAABD72B1064000013DB89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAABD52B1064000013DB89 /* LaunchScreen.storyboard */; };
-		3BDAABE02B1066E20013DB89 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAABDF2B1066E20013DB89 /* LoginViewModel.swift */; };
-		3BDAABE32B1067900013DB89 /* BindingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAABE22B1067900013DB89 /* BindingTextField.swift */; };
+		3BDAAC1E2B107F350013DB89 /* BindingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAAC1D2B107F350013DB89 /* BindingTextField.swift */; };
+		3BDAAC232B107FC00013DB89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAAC222B107FC00013DB89 /* ViewController.swift */; };
+		3BDAAC252B10800D0013DB89 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAAC242B10800D0013DB89 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3BDAABC72B1063FF0013DB89 /* BindingVtoVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BindingVtoVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BDAABCA2B1063FF0013DB89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BDAABCC2B1063FF0013DB89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3BDAABCE2B1063FF0013DB89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3BDAABD12B1063FF0013DB89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3BDAABD32B1064000013DB89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BDAABD62B1064000013DB89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BDAABD82B1064000013DB89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3BDAABDF2B1066E20013DB89 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		3BDAABE22B1067900013DB89 /* BindingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingTextField.swift; sourceTree = "<group>"; };
+		3BDAAC1D2B107F350013DB89 /* BindingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingTextField.swift; sourceTree = "<group>"; };
+		3BDAAC222B107FC00013DB89 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3BDAAC242B10800D0013DB89 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 		3BDAABDE2B1066900013DB89 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				3BDAABDF2B1066E20013DB89 /* LoginViewModel.swift */,
+				3BDAAC242B10800D0013DB89 /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -84,7 +84,7 @@
 		3BDAABE12B1067470013DB89 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				3BDAABE22B1067900013DB89 /* BindingTextField.swift */,
+				3BDAAC1D2B107F350013DB89 /* BindingTextField.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -92,7 +92,7 @@
 		3BDAABE42B106ACE0013DB89 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3BDAABCE2B1063FF0013DB89 /* ViewController.swift */,
+				3BDAAC222B107FC00013DB89 /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,10 +168,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BDAABE02B1066E20013DB89 /* LoginViewModel.swift in Sources */,
-				3BDAABCF2B1063FF0013DB89 /* ViewController.swift in Sources */,
-				3BDAABE32B1067900013DB89 /* BindingTextField.swift in Sources */,
+				3BDAAC1E2B107F350013DB89 /* BindingTextField.swift in Sources */,
+				3BDAAC232B107FC00013DB89 /* ViewController.swift in Sources */,
 				3BDAABCB2B1063FF0013DB89 /* AppDelegate.swift in Sources */,
+				3BDAAC252B10800D0013DB89 /* LoginViewModel.swift in Sources */,
 				3BDAABCD2B1063FF0013DB89 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

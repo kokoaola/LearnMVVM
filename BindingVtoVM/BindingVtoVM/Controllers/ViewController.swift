@@ -26,15 +26,7 @@ class ViewController: UIViewController {
         print(loginVM.username)
         print(loginVM.password)
     }
-    
-    //ログイン情報呼び出しボタンが押されたときのアクション
-    @objc func fetchLoginInfo() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            self?.loginVM.username.value = "marydoe"
-            self?.loginVM.password.value = "password"
-        }
-    }
-    
+
     
     ///UIコンポーネントを設定するプライベートメソッド
     private func setupUI() {
@@ -69,12 +61,6 @@ class ViewController: UIViewController {
         //ボタンの内側をタッチされると、log in というセレクター関数が呼び出される
         loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         
-        ///ログイン情報を呼び出すボタンの設定
-        let loginInfoButton = UIButton()
-        loginButton.setTitle("Fetch Login Info", for: .normal)
-        loginButton.backgroundColor = UIColor.gray
-        //ボタンの内側をタッチされると、log in というセレクター関数が呼び出される
-        loginButton.addTarget(self, action: #selector(fetchLoginInfo), for: .touchUpInside)
 
         //スタックビューにテキストフィールドとログインボタンを追加
         let stackView = UIStackView(arrangedSubviews: [usernameTextField, passwordTextField, loginButton])
