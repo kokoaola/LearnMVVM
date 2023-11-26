@@ -66,9 +66,9 @@
 				3BDAABFA2B107D310013DB89 /* Assets.xcassets */,
 				3BDAABFC2B107D310013DB89 /* LaunchScreen.storyboard */,
 				3BDAABFF2B107D310013DB89 /* Info.plist */,
+				3BDAAC1F2B107F460013DB89 /* Controllers */,
 				3BDAAC272B10804F0013DB89 /* ViewModels */,
 				3BDAAC262B10803F0013DB89 /* CustomViews */,
-				3BDAAC1F2B107F460013DB89 /* Controllers */,
 			);
 			path = BindingVMtoV;
 			sourceTree = "<group>";

@@ -7,6 +7,26 @@
 
 import UIKit
 
+///MVとViewをコードでバインディングする
+///UIKit には組み込みのバインディングがないため、コードを記述する
+/*
+1.ViewControllerの初期化: viewDidLoad()メソッド内で、バインディングするクロージャを設定。これによりDynamic型のusernameとpasswordプロパティがテキストフィールドの値の変更を監視し、変更時にテキストフィールドを更新する
+
+2.テキストフィールドの設定: usernameTextFieldとpasswordTextFieldは、ユーザーの入力を受け取るためのBindingTextFieldインスタンス。これらのフィールドは、ユーザーの入力をloginVMの対応するプロパティにバインドする
+
+3.メソッドのトリガー: Fetch Login Infoボタンをタップ後fetchLoginInfo()メソッドが呼び出される
+ 
+ 遅延実行: DispatchQueue.main.asyncAfterを使用して、2秒後に特定のコードブロックを実行
+ 
+ ユーザー名とパスワードの設定: 2秒後、loginVM（LoginViewModelインスタンス）のusernameとpasswordプロパティに、事前に定義された値（この場合は"marydoe"と"password"）が設定
+ 
+
+ データバインディング: loginVMのusernameとpasswordはDynamic型であるため、これらの値が変更されると、それぞれのbindメソッドによって登録されたクロージャが呼び出される
+
+ UIの更新: usernameとpasswordのバインディングされたクロージャは、テキストフィールドのtextプロパティを更新するため、テキストフィールドの表示が新しい値に変更される
+*/
+
+
 /// ViewControllerクラスはUI要素を初期化し、ログイン機能を提供する
 class ViewController: UIViewController {
     
@@ -18,12 +38,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ///ユーザー名プロパティを設定するたびに呼び出される
+        ///ロードされるたびにバインディングするクロージャを設定
         loginVM.username.bind { [weak self] text in
             self?.usernameTextField.text = text
         }
         
-        ///パスワードプロパティを設定するたびに呼び出される
+        ///ロードされるたびにバインディングするクロージャを設定
         loginVM.password.bind { [weak self] text in
             self?.passwordTextField.text = text
         }
@@ -71,8 +91,9 @@ class ViewController: UIViewController {
     
     ///ログイン情報呼び出しボタンが押されたときのアクション
     @objc func fetchLoginInfo() {
+        ///valueが変更されるとDynamic型のdidsetが発動して、viewDidLoadでbindで設定したクロージャが毎回実行される
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            self?.loginVM.username.value = "marydoe"
+            self?.loginVM.username.value = "koala"
             self?.loginVM.password.value = "password"
         }
     }
@@ -113,4 +134,6 @@ class ViewController: UIViewController {
         
     }
 }
+
+
 
