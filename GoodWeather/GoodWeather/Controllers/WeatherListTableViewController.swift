@@ -76,6 +76,7 @@ class WeatherListTableViewController: UITableViewController,AddWeatherDelegate {
         return cell
     }
     
+    
     ///segueを使って画面遷移を準備するためのメソッド
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

@@ -11,7 +11,7 @@ import Foundation
 class WeatherListViewModel {
     
     //天気ビューモデルの配列をプライベート変数として保持
-    private var weatherViewModels = [WeatherViewModel]()
+    var weatherViewModels = [WeatherViewModel]()
     
     //新しい天気ビューモデルを配列に追加する
     func addWeatherViewModel(_ vm: WeatherViewModel) {
@@ -41,7 +41,12 @@ class WeatherListViewModel {
     private func toCelcius(){
         weatherViewModels = weatherViewModels.map { vm in
             let weatherModel = vm
+            print("-------")
+            print("weatherModel.temperature", weatherModel.temperature)
+            print("計算")
             weatherModel.temperature = (weatherModel.temperature - 32) * 5/9
+            print("weatherModel.temperature", weatherModel.temperature)
+            print("-------")
             return weatherModel
         }
     }

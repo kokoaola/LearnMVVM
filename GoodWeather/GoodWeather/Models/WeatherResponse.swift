@@ -7,11 +7,13 @@
 
 import Foundation
 
+//取得したデータ
 struct WeatherResponse: Decodable {
     let name: String
     let main: Weather
 }
 
+//取得したデータ
 struct Weather: Decodable {
     //温度
     let temp: Double
