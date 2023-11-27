@@ -7,29 +7,49 @@
 
 import XCTest
 
-final class CalculatorUnitTestTests: XCTestCase {
+//このプロジェクトである電卓アプリ内のすべてのものはテスト目的で利用可能
+@testable import CalculatorUnitTest
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+/// CalculatorAppのテストケースを定義するクラス
+class CalculatorUnitTestTests: XCTestCase {
+    
+    //Calculatorクラスのインスタンスを生成
+    private var calculator: Calculator!
+
+    
+    //各テスト開始前に呼ばれるセットアップメソッド
+    //インスタンスの生成が何度も行われない
+    override func setUp() {
+        super.setUp()
+        //Calculatorのインスタンスを初期化
+        self.calculator = Calculator()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    
+    
+    //2つの数値を減算する機能のテスト
+    func test_SubtractTwoNumbers() {
+        
+        //減算の結果を計算
+        let result = self.calculator.subtract(5,2)
+        //結果が期待値（3）と等しいことを確認
+        XCTAssertEqual(result, 3)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    
+    //2つの数値を加算する機能のテスト
+    func test_AddTwoNumbers() {
+        
+        //加算の結果を計算
+        let result = self.calculator.add(2,3)
+        //結果が期待値（5）と等しいことをXCTAssertEqualで確認
+        XCTAssertEqual(result, 5)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    //各テスト終了後に呼ばれるクリーンアップメソッド
+    //データベースやユーザーデフォルトに何かを作成した場合などは、次のテストでのトラブル防止のために書き込んだものをtearDownで必ず削除
+    override func tearDown() {
+        super.tearDown()
     }
-
 }
+
