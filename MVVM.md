@@ -103,3 +103,6 @@ Tests
 - ViewModeからViewlのパターン
     - ViewModeのプロパティが変更されるたびにViewのテキストフィールドのテキストが自動で更新される
 
+## WebAPIを使用したMVVMについて
+- ビューがビューモデルにアクセスし、ビューモデルがWebServiceやClient層に通信を要求し、WebServiceやClient層が通信を行う
+- ネットワーク呼び出しをビューモデル内で直接実行しているわけではないことに注意
